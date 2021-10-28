@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inventory</title>
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-pink-300">
+    <div id="app">
+      <h1 id="title" class="text-2xl text-center text-red-800">{{title}}</h1>
+      <h3 class="text-sm text-center text-red-800">
+        Total Inventory: {{total}}
+      </h3>
+      <div class="flex flex-col">
+        <input
+          placeholder="New Product"
+          type="text"
+          class="rounded p-2 mx-auto w-10/12 mt-4"
+          V-model="newProduct"
+          @Change="addProduct"
+        />
+        <ul>
+          <li
+            V-For="product in products"
+            class="
+              bg-gray-600
+              w-10/12
+              mx-auto
+              mt-2
+              py-2
+              px-2
+              text-red-900
+              rounded
+              shadow
+            "
+          >
+            <span V-if="product.qty == 0" class="text-xs font-bold text-white"
+              >Out of Stock!
+            </span>
+            <span>{{product.qty}}</span> - {{product.name}}
+
+            <button
+              class="
+                bg-green-500
+                ml-10
+                px-4
+                text-white
+                rounded
+                hover:bg-green-700
+              "
+              @click="product.qty++"
+            >
+              +
+            </button>
+            <button
+              V-Show="product.qty>0"
+              class="bg-red-500 ml-10 px-4 text-white rounded hover:bg-red-700"
+              @click="product.qty--"
+            >
+              -
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
